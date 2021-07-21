@@ -25,7 +25,6 @@ import java.util.function.Function;
 
 /**
  * Traversal Function parser parses Function enums.
- * As it is stateless, we use singleton to avoid object creation/deletion
  */
 public class TraversalFunctionVisitor extends GremlinBaseVisitor<Function> {
 

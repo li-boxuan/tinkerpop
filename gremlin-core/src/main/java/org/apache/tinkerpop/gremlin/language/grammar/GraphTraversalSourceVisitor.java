@@ -22,16 +22,22 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSo
 import org.apache.tinkerpop.gremlin.structure.Graph;
 
 /**
- * This class implements the GraphTraversalSource producing methods of Gremlin grammar.
+ * This class implements the {@link GraphTraversalSource} producing methods of Gremlin grammar.
  */
 public class GraphTraversalSourceVisitor extends GremlinBaseVisitor<GraphTraversalSource> {
     public static final String TRAVERSAL_ROOT = "g";
     private final Graph graph;
     private final GremlinAntlrToJava antlr;
+    private final String traversalSourceName;
 
     public GraphTraversalSourceVisitor(final GremlinAntlrToJava antlr) {
+        this(TRAVERSAL_ROOT, antlr);
+    }
+
+    public GraphTraversalSourceVisitor(final String traversalSourceName, final GremlinAntlrToJava antlr) {
         this.graph = antlr.graph;
         this.antlr = antlr;
+        this.traversalSourceName = traversalSourceName;
     }
 
     /**
@@ -45,7 +51,7 @@ public class GraphTraversalSourceVisitor extends GremlinBaseVisitor<GraphTravers
         } else {
             final int childIndexOfSelfMethod = 2;
             GraphTraversalSource source;
-            if (ctx.getChild(0).getText().equals(TRAVERSAL_ROOT)) {
+            if (ctx.getChild(0).getText().equals(traversalSourceName)) {
                 // handle single traversal source
                 source = graph.traversal();
             } else {

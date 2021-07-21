@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Graph Traversal source self method visitor
+ * A {@link GraphTraversalSource} self method visitor.
  */
 public class TraversalSourceSelfMethodVisitor extends GremlinBaseVisitor<GraphTraversalSource> {
 

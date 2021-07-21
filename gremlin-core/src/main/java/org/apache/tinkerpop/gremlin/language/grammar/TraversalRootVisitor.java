@@ -58,7 +58,8 @@ public class TraversalRootVisitor<G extends Traversal> extends GremlinBaseVisito
         if (ctx.getChild(0) instanceof GremlinParser.RootTraversalContext) {
             return visitChildren(ctx);
         } else if (ctx.getChild(2) instanceof GremlinParser.ChainedParentOfGraphTraversalContext) {
-            return new TraversalRootVisitor<Traversal>(antlr.createAnonymous.get()).visitChainedParentOfGraphTraversal(ctx.chainedTraversal().chainedParentOfGraphTraversal());
+            return new TraversalRootVisitor<Traversal>(antlr.createAnonymous.get()).
+                    visitChainedParentOfGraphTraversal(ctx.chainedTraversal().chainedParentOfGraphTraversal());
         } else {
             return new TraversalMethodVisitor(antlr, antlr.createAnonymous.get()).visitChainedTraversal(ctx.chainedTraversal());
         }
@@ -84,10 +85,12 @@ public class TraversalRootVisitor<G extends Traversal> extends GremlinBaseVisito
 
             if (ctx.getChild(childIndexOfChainedTraversal) instanceof GremlinParser.ChainedParentOfGraphTraversalContext) {
                 final TraversalRootVisitor traversalRootVisitor = new TraversalRootVisitor(traversal);
-                return traversalRootVisitor.visitChainedParentOfGraphTraversal((GremlinParser.ChainedParentOfGraphTraversalContext) ctx.getChild(childIndexOfChainedTraversal));
+                return traversalRootVisitor.visitChainedParentOfGraphTraversal(
+                        (GremlinParser.ChainedParentOfGraphTraversalContext) ctx.getChild(childIndexOfChainedTraversal));
             } else {
                 final TraversalMethodVisitor traversalMethodVisitor = new TraversalMethodVisitor(antlr, traversal);
-                return traversalMethodVisitor.visitChainedTraversal((GremlinParser.ChainedTraversalContext) ctx.getChild(childIndexOfChainedTraversal));
+                return traversalMethodVisitor.visitChainedTraversal(
+                        (GremlinParser.ChainedTraversalContext) ctx.getChild(childIndexOfChainedTraversal));
             }
         } else {
             return traversal;

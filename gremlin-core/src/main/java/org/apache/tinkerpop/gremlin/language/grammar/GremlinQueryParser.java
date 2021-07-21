@@ -29,7 +29,6 @@ public class GremlinQueryParser {
     private static final Logger log = LoggerFactory.getLogger(GremlinQueryParser.class);
     private static final GremlinErrorListener errorListener = new GremlinErrorListener();
 
-    // todo: cleanup exception
     public static Object parse(final String query) throws Exception {
         return parse(query, new GremlinAntlrToJava());
     }

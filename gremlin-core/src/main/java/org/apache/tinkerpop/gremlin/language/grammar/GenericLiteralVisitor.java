@@ -473,7 +473,7 @@ public class GenericLiteralVisitor extends GremlinBaseVisitor<Object> {
 
     /**
      * {@inheritDoc}
-     * Generic literal collection returns a list of Object
+     * Generic literal collection returns a list of {@code Object}
      */
     @Override
     public Object visitGenericLiteralCollection(final GremlinParser.GenericLiteralCollectionContext ctx) {

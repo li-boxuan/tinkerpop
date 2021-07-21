@@ -19,7 +19,7 @@
 package org.apache.tinkerpop.gremlin.language.grammar;
 
 /**
- * Gremlin Parser Exception is thrown when a parser error is encountered.
+ * This exception is thrown when a parser error is encountered.
  */
 public class GremlinParserException extends RuntimeException {
 

@@ -21,10 +21,11 @@ package org.apache.tinkerpop.gremlin.language.grammar;
 import org.apache.tinkerpop.gremlin.process.computer.traversal.step.map.PageRank;
 import org.apache.tinkerpop.gremlin.process.computer.traversal.step.map.PeerPressure;
 import org.apache.tinkerpop.gremlin.process.computer.traversal.step.map.ShortestPath;
+import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.WithOptions;
 
 /**
- * Gremlin String Constant Visitor handles parsing the new constant types Gremlin introduced by version 3.4.0.
+ * Covers {@code String} oriented constants used as arguments to {@link GraphTraversal#with(String)} steps.
  */
 public class GremlinStringConstantsVisitor extends GremlinBaseVisitor<Object> {
 

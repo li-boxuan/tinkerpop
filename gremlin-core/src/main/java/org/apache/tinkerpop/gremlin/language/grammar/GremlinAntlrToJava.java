@@ -22,6 +22,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.tinkerpop.gremlin.process.traversal.Bytecode;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalSource;
+import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.DefaultGraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
@@ -53,21 +54,30 @@ public class GremlinAntlrToJava extends GremlinBaseVisitor<Object> {
      */
     final GremlinBaseVisitor<GraphTraversal> tvisitor;
 
-    final GremlinBaseVisitor<Traversal[]> anonymousListVisitor;
+    /**
+     * A {@link GremlinBaseVisitor} that is meant to construct a list of traversals anonymously.
+     */
+    final GremlinBaseVisitor<Traversal[]> tListVisitor;
 
-    final Supplier<GraphTraversal> createAnonymous;
+    /**
+     * Creates a {@link GraphTraversal} implementation that is meant to be anonymous. This provides a way to change the
+     * type of implementation that will be used as anonymous traversals. By default, it uses {@link __} which generates
+     * a {@link DefaultGraphTraversal}
+     */
+    final Supplier<GraphTraversal<?,?>> createAnonymous;
 
     /**
      * Constructs a new instance and is bound to an {@link EmptyGraph}. This form of construction is helpful for
      * generating {@link Bytecode} or for various forms of testing. {@link Traversal} instances constructed from this
-     * form will not be capable of iterating.
+     * form will not be capable of iterating. Assumes that "g" is the name of the {@link GraphTraversalSource}.
      */
     public GremlinAntlrToJava() {
         this(EmptyGraph.instance());
     }
 
     /**
-     * Constructs a new instance that is bound to the specified {@link Graph} instance.
+     * Constructs a new instance that is bound to the specified {@link Graph} instance. Assumes that "g" is the name
+     * of the {@link GraphTraversalSource}.
      */
     public GremlinAntlrToJava(final Graph graph) {
         this(graph, __::start);
@@ -75,13 +85,26 @@ public class GremlinAntlrToJava extends GremlinBaseVisitor<Object> {
 
     /**
      * Constructs a new instance that is bound to the specified {@link Graph} instance with an override to using
-     * {@link __} for constructing anonymous {@link Traversal} instances.
+     * {@link __} for constructing anonymous {@link Traversal} instances. Assumes that "g" is the name of the
+     * {@link GraphTraversalSource}.
      */
-    protected GremlinAntlrToJava(final Graph graph, final Supplier<GraphTraversal> createAnonymous) {
+    protected GremlinAntlrToJava(final Graph graph, final Supplier<GraphTraversal<?,?>> createAnonymous) {
+        this(GraphTraversalSourceVisitor.TRAVERSAL_ROOT, graph, createAnonymous);
+    }
+
+    /**
+     * Constructs a new instance that is bound to the specified {@link Graph} instance with an override to using
+     * {@link __} for constructing anonymous {@link Traversal} instances.
+     *
+     * @param traversalSourceName The name of the traversal source which will be "g" if not specified.
+     */
+    protected GremlinAntlrToJava(final String traversalSourceName, final Graph graph,
+                                 final Supplier<GraphTraversal<?,?>> createAnonymous) {
         this.graph = graph;
-        this.gvisitor = new GraphTraversalSourceVisitor(this);
+        this.gvisitor = new GraphTraversalSourceVisitor(
+                null == traversalSourceName ? GraphTraversalSourceVisitor.TRAVERSAL_ROOT : traversalSourceName,this);
         this.tvisitor = new TraversalRootVisitor(this);
-        this.anonymousListVisitor = new NestedTraversalSourceListVisitor(this);
+        this.tListVisitor = new NestedTraversalSourceListVisitor(this);
         this.createAnonymous = createAnonymous;
     }
 
@@ -130,11 +153,10 @@ public class GremlinAntlrToJava extends GremlinBaseVisitor<Object> {
     }
 
     /**
-     * Override the aggregate result behavior.
-     * If the next Result is null, return the current result.
-     * This is used to handle child EOF, which is the last child of the QueryList context.
-     * If the next Result is not null, return the next result.
-     * This is used to handle multiple queries, and return only the last query result logic.
+     * Override the aggregate result behavior. If the next result is {@code null}, return the current result. This is
+     * used to handle child EOF, which is the last child of the {@code QueryList} context. If the next Result is not
+     * {@code null}, return the next result. This is used to handle multiple queries, and return only the last query
+     * result logic.
      */
     @Override
     protected Object aggregateResult(final Object result, final Object nextResult) {

@@ -23,7 +23,7 @@ import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
 
 /**
- * Gremlin error listener class which throw GremlinParserException on syntax error
+ * Gremlin error listener class which throw {@link GremlinParserException} on syntax error.
  */
 public class GremlinErrorListener extends BaseErrorListener {
 

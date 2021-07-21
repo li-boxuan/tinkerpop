@@ -21,9 +21,8 @@ package org.apache.tinkerpop.gremlin.language.grammar;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 
 /**
- * This class implements gremlin grammar's nested-traversal-list methods
- * that returns a Traversal [] to the callers.  It doesn't depend on a GraphTraversal and hence a singleton class.
- * As it is stateless, we use singleton to avoid object creation/deletion
+ * This class implements Gremlin grammar's nested-traversal-list methods that returns a {@link Traversal} {@code []}
+ * to the callers.
  */
 public class NestedTraversalSourceListVisitor extends GremlinBaseVisitor<Traversal[]> {
 

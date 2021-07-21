@@ -19,20 +19,10 @@
 package org.apache.tinkerpop.gremlin.language.grammar;
 
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.apache.tinkerpop.gremlin.process.traversal.Scope;
 
 /**
- * Traversal enum parser parses all the enums in graph traversal.
- * These include:
- *      org.apache.tinkerpop.gremlin.process.traversal.Scope
- *      org.apache.tinkerpop.gremlin.process.traversal.Order
- *      org.apache.tinkerpop.gremlin.process.traversal.Pop
- *      org.apache.tinkerpop.gremlin.process.traversal.SackFunctions$Barrier
- *      org.apache.tinkerpop.gremlin.process.traversal.Operator
- *      org.apache.tinkerpop.gremlin.structure.T
- *      org.apache.tinkerpop.gremlin.structure.Column
- *      org.apache.tinkerpop.gremlin.structure.Direction
- *      org.apache.tinkerpop.gremlin.structure.VertexProperty$Cardinality
- *      org.apache.tinkerpop.gremlin.process.traversal.step.TraversalOptionParent$Pick
+ * Traversal enum parser parses all the enums like (e.g. {@link Scope} in graph traversal.
  */
 public class TraversalEnumParser {
 

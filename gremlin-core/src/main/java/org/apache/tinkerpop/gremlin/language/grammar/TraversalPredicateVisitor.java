@@ -26,9 +26,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-/**
- * As this class does not need any status, use singleton pattern to avoid object creation and GC overhead.
- */
 public class TraversalPredicateVisitor extends GremlinBaseVisitor<P> {
     private static TraversalPredicateVisitor instance;
 

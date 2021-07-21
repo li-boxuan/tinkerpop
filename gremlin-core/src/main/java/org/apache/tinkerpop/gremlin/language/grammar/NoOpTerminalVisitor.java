@@ -19,12 +19,15 @@
 package org.apache.tinkerpop.gremlin.language.grammar;
 
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.apache.tinkerpop.gremlin.process.traversal.Bytecode;
+import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
+import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 
 /**
  * {@inheritDoc}
  *
- * The same as parent visitor {@link GremlinAntlrToJava} but returns bytecode instead of a Traversal or TraversalSource,
- * and uses an overridden terminal step visitor
+ * The same as parent visitor {@link GremlinAntlrToJava} but returns {@link Bytecode} instead of a {@link Traversal}
+ * or {@link GraphTraversalSource}, and uses an overridden terminal step visitor.
  */
 public class NoOpTerminalVisitor extends GremlinAntlrToJava {
 
@@ -33,8 +36,9 @@ public class NoOpTerminalVisitor extends GremlinAntlrToJava {
     }
 
     /**
-     * Returns bytecode of traversal or traversal source, overriding any terminal step operations to prevent them from
-     * being executed using the {@link TraversalTerminalMethodVisitor} to append terminal operations to bytecode.
+     * Returns {@link Bytecode} of {@link Traversal} or {@link GraphTraversalSource}, overriding any terminal step
+     * operations to prevent them from being executed using the {@link TraversalTerminalMethodVisitor} to append
+     * terminal operations to bytecode.
      *
      * @param ctx - the parse tree
      * @return - bytecode from the traversal or traversal source
@@ -69,11 +73,9 @@ public class NoOpTerminalVisitor extends GremlinAntlrToJava {
                 }
             }
         } else {
-            // TODO: what queries hit this path?
-            return String.valueOf(visitChildren(ctx));
+            // not clear what valid Gremlin, if any, will trigger this at the moment.
+            throw new GremlinParserException("Unexpected parse tree for NoOpTerminalVisitor");
         }
     }
-
-
 }
 

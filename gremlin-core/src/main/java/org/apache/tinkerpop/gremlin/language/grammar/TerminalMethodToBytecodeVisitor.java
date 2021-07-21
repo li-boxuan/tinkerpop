@@ -21,6 +21,10 @@ package org.apache.tinkerpop.gremlin.language.grammar;
 import org.apache.tinkerpop.gremlin.process.traversal.Bytecode;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 
+/**
+ * Handles terminal steps for {@link Bytecode} as they are not added this way naturally. They are normally treated as
+ * the point of traversal execution.
+ */
 public class TerminalMethodToBytecodeVisitor extends TraversalTerminalMethodVisitor {
 
     public TerminalMethodToBytecodeVisitor(final Traversal traversal) {
