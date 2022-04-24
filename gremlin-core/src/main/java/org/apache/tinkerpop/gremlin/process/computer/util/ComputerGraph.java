@@ -142,7 +142,7 @@ public final class ComputerGraph implements Graph {
 
         @Override
         public Set<String> keys() {
-            return this.element.keys().stream().filter(key -> !computeKeys.contains(key)).collect(Collectors.toSet());
+            return this.element.keys().stream().filter(key -> computeKeys.contains(key)).collect(Collectors.toSet());
         }
 
         @Override
@@ -169,7 +169,7 @@ public final class ComputerGraph implements Graph {
 
         @Override
         public <V> Iterator<? extends Property<V>> properties(final String... propertyKeys) {
-            return (Iterator) IteratorUtils.filter(this.element.properties(propertyKeys), property -> !computeKeys.contains(property.key()));
+            return (Iterator) IteratorUtils.filter(this.element.properties(propertyKeys), property -> computeKeys.contains(property.key()));
         }
 
         @Override

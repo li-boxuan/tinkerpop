@@ -30,5 +30,6 @@ import org.junit.runner.RunWith;
  */
 @RunWith(ProcessComputerSuite.class)
 @GraphProviderClass(provider = TinkerGraphComputerProvider.class, graph = TinkerGraph.class)
+// FIXME: marker to find this test
 public class TinkerGraphProcessComputerTest {
 }

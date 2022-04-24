@@ -88,7 +88,9 @@ public @interface LoadGraphWith {
          * Loads a test graph which contains disconnected subgraphs specialized for testing purposes (e.g. a subgraph
          * with a self-loop).
          */
-        SINK;
+        SINK,
+
+        PPI;
 
         private static final List<FeatureRequirement> featuresRequiredByClassic = new ArrayList<FeatureRequirement>() {{
             add(FeatureRequirement.Factory.create(FEATURE_STRING_VALUES, VertexPropertyFeatures.class));
@@ -131,6 +133,8 @@ public @interface LoadGraphWith {
                     return RESOURCE_PATH_PREFIX + "grateful-dead-v3d0.kryo";
                 case SINK:
                     return RESOURCE_PATH_PREFIX + "tinkerpop-sink-v3d0.kryo";
+                case PPI:
+                    return RESOURCE_PATH_PREFIX + "ppi-v3d0.kryo";
             }
 
             throw new RuntimeException("No file for this GraphData type");
@@ -139,6 +143,7 @@ public @interface LoadGraphWith {
         public List<FeatureRequirement> featuresRequired() {
             switch (this) {
                 case CLASSIC:
+                case PPI:
                     return featuresRequiredByClassic;
                 case CREW:
                     return featuresRequiredByCrew;

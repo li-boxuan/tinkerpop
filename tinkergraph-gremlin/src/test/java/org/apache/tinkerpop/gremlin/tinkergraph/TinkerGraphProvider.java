@@ -190,7 +190,7 @@ public class TinkerGraphProvider extends AbstractGraphProvider {
      */
     protected TinkerGraph.DefaultIdManager selectIdMakerFromGraphData(final LoadGraphWith.GraphData loadGraphWith) {
         if (null == loadGraphWith) return TinkerGraph.DefaultIdManager.ANY;
-        if (loadGraphWith.equals(LoadGraphWith.GraphData.CLASSIC))
+        if (loadGraphWith.equals(LoadGraphWith.GraphData.CLASSIC) || loadGraphWith.equals(LoadGraphWith.GraphData.PPI))
             return TinkerGraph.DefaultIdManager.INTEGER;
         else if (loadGraphWith.equals(LoadGraphWith.GraphData.MODERN))
             return TinkerGraph.DefaultIdManager.INTEGER;

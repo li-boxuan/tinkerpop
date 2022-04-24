@@ -22,6 +22,8 @@ import org.apache.tinkerpop.gremlin.AbstractGremlinSuite;
 import org.apache.tinkerpop.gremlin.process.computer.GraphComputer;
 import org.apache.tinkerpop.gremlin.process.computer.GraphComputerTest;
 import org.apache.tinkerpop.gremlin.process.computer.clone.CloneVertexProgramTest;
+import org.apache.tinkerpop.gremlin.process.computer.neuralnetwork.GraphAttentionNetworkVertexProgram;
+import org.apache.tinkerpop.gremlin.process.computer.neuralnetwork.GraphAttentionNetworkVertexProgramTest;
 import org.apache.tinkerpop.gremlin.process.computer.ranking.pagerank.PageRankVertexProgramTest;
 import org.apache.tinkerpop.gremlin.process.computer.search.path.ShortestPathVertexProgramTest;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalEngine;
@@ -118,101 +120,12 @@ public class ProcessComputerSuite extends AbstractGremlinSuite {
      */
     private static final Class<?>[] allTests = new Class<?>[]{
 
-            // computer, vertex program, and map/reduce semantics
-            GraphComputerTest.class,
-
-            // branch
-            BranchTest.Traversals.class,
-            ChooseTest.Traversals.class,
-            OptionalTest.Traversals.class,
-            LocalTest.Traversals.class,
-            RepeatTest.Traversals.class,
-            UnionTest.Traversals.class,
-
-            // filter
-            AndTest.Traversals.class,
-            CoinTest.Traversals.class,
-            CyclicPathTest.Traversals.class,
-            DedupTest.Traversals.class,
-            FilterTest.Traversals.class,
-            HasTest.Traversals.class,
-            IsTest.Traversals.class,
-            OrTest.Traversals.class,
-            RangeTest.Traversals.class,
-            SampleTest.Traversals.class,
-            SimplePathTest.Traversals.class,
-            TailTest.Traversals.class,
-            WhereTest.Traversals.class,
-
-            // map
-            CoalesceTest.Traversals.class,
-            ConnectedComponentTest.Traversals.class,
-            ConstantTest.Traversals.class,
-            CountTest.Traversals.class,
-            ElementMapTest.Traversals.class,
-            FlatMapTest.Traversals.class,
-            FoldTest.Traversals.class,
-            GraphTest.Traversals.class,
-            LoopsTest.Traversals.class,
-            MapTest.Traversals.class,
-            MatchTest.CountMatchTraversals.class,
-            MatchTest.GreedyMatchTraversals.class,
-            MathTest.Traversals.class,
-            MaxTest.Traversals.class,
-            MeanTest.Traversals.class,
-            MinTest.Traversals.class,
-            SumTest.Traversals.class,
-            OrderTest.Traversals.class,
-            PageRankTest.Traversals.class,
-            PathTest.Traversals.class,
-            PeerPressureTest.Traversals.class,
-            ProfileTest.Traversals.class,
-            ProjectTest.Traversals.class,
-            ProgramTest.Traversals.class,
-            PropertiesTest.Traversals.class,
-            ReadTest.Traversals.class,
-            ShortestPathTest.Traversals.class,
-            SelectTest.Traversals.class,
-            UnfoldTest.Traversals.class,
-            ValueMapTest.Traversals.class,
-            VertexTest.Traversals.class,
-            WriteTest.Traversals.class,
-
-            // sideEffect
-            AddEdgeTest.Traversals.class,
-            AggregateTest.Traversals.class,
-            ExplainTest.Traversals.class,
-            GroupTest.Traversals.class,
-            GroupCountTest.Traversals.class,
-            InjectTest.Traversals.class,
-            ProfileTest.Traversals.class,
-            SackTest.Traversals.class,
-            SideEffectCapTest.Traversals.class,
-            SideEffectTest.Traversals.class,
-            StoreTest.Traversals.class,
-            SubgraphTest.Traversals.class,
-            TreeTest.Traversals.class,
-
-            // compliance
-            ComplexTest.Traversals.class,
-            TraversalInterruptionComputerTest.class,
-
             // algorithms
-            PageRankVertexProgramTest.class,
-            ShortestPathVertexProgramTest.class,
-            CloneVertexProgramTest.class,
+        GraphAttentionNetworkVertexProgramTest.class,
+//            PageRankVertexProgramTest.class,
+//            ShortestPathVertexProgramTest.class,
+//            CloneVertexProgramTest.class,
 
-            // creations
-            TranslationStrategyProcessTest.class,
-
-            // decorations
-            ReadOnlyStrategyProcessTest.class,
-            SeedStrategyProcessTest.class,
-            SubgraphStrategyProcessTest.class,
-
-            // optimizations
-            IncidentToAdjacentStrategyProcessTest.class,
-            EarlyLimitStrategyProcessTest.class
     };
 
     /**
