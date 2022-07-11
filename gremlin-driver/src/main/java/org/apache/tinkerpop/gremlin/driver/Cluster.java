@@ -54,6 +54,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -955,7 +956,7 @@ public final class Cluster {
          */
         public Builder addContactPoint(final String address) {
             try {
-                this.addresses.add(InetAddress.getByName(address));
+                this.addresses.addAll(Arrays.asList(InetAddress.getAllByName(address)));
                 return this;
             } catch (UnknownHostException e) {
                 throw new IllegalArgumentException(e.getMessage());
